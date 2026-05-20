@@ -72,6 +72,29 @@ button:disabled {
   border-bottom: 1px solid rgba(30, 35, 41, 0.1);
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.view-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #5d6870;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.view-counts span {
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #f7f5ee;
+}
+
 .eyebrow {
   margin: 0 0 4px;
   color: #307064;
@@ -185,6 +208,17 @@ h2 {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
+}
+
+.source-action {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  color: #1f4f47;
+  background: #dcefe8;
 }
 
 .sources a {
@@ -386,6 +420,83 @@ select {
   color: #5d6870;
   font-size: 0.88rem;
   line-height: 1.45;
+}
+
+.topic-list {
+  display: grid;
+  gap: 8px;
+}
+
+.topic-list button {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  border: 1px solid rgba(30, 35, 41, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #22313b;
+  background: #fffdf8;
+  text-align: left;
+}
+
+.topic-list span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.topic-list small {
+  color: #60717b;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat-grid span {
+  display: grid;
+  gap: 3px;
+  border-radius: 8px;
+  padding: 10px;
+  color: #60717b;
+  background: #f7f5ee;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.stat-grid b {
+  color: #22313b;
+  font-size: 1rem;
+}
+
+.note-list {
+  display: grid;
+  gap: 8px;
+}
+
+.note-list article {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid #c06445;
+  padding: 8px 0 8px 10px;
+  background: #fffdf8;
+}
+
+.note-list strong {
+  color: #22313b;
+  font-size: 0.88rem;
+}
+
+.note-list span {
+  color: #60717b;
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 @media (max-width: 920px) {
