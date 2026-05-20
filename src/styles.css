@@ -415,6 +415,29 @@ select {
   font-weight: 850;
 }
 
+.ai-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border-radius: 8px;
+  padding: 0 12px;
+  color: #704017;
+  background: #f6e0c5;
+  font-weight: 850;
+}
+
+.ai-status.ready {
+  color: #1f4f47;
+  background: #e1f1ec;
+}
+
+.ai-status.fallback {
+  color: #5d6870;
+  background: #f7f5ee;
+}
+
 .ai-progress {
   margin: 0;
   color: #5d6870;

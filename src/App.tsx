@@ -106,7 +106,8 @@ const uiCopy = {
     localAi: '本機 AI',
     gemmaReady: 'Gemma 已就緒',
     loadingModel: '載入中',
-    loadGemma: '載入 Gemma',
+    preparingAi: '背景準備中',
+    aiFallback: '輕量模式',
     topicBank: '聊天素材庫',
     topicCount: '篇素材',
     useTopic: '拿來聊天',
@@ -150,7 +151,8 @@ const uiCopy = {
     localAi: 'Local AI',
     gemmaReady: 'Gemma Ready',
     loadingModel: 'Loading',
-    loadGemma: 'Load Gemma',
+    preparingAi: 'Preparing',
+    aiFallback: 'Light mode',
     topicBank: 'Topic Bank',
     topicCount: 'topics',
     useTopic: 'Use topic',
@@ -338,6 +340,10 @@ function App() {
       .then((items) => setTopicItems(items))
       .catch(() => setTopicItems([]))
   }, [])
+
+  useEffect(() => {
+    void webLLM.init()
+  }, [webLLM.init])
 
   function speak(text: string) {
     if (!('speechSynthesis' in window)) {
@@ -687,17 +693,15 @@ function App() {
             <Brain size={18} />
             <h2>{copy.localAi}</h2>
           </div>
-          <button
-            className="ai-button"
-            type="button"
-            onClick={() => void webLLM.init()}
-            disabled={webLLM.isLoading || webLLM.isLoaded}
-          >
+          <div className={`ai-status ${webLLM.isLoaded ? 'ready' : webLLM.isLoading ? 'loading' : 'fallback'}`}>
             <Sparkles size={17} />
-            {webLLM.isLoaded ? copy.gemmaReady : webLLM.isLoading ? `${copy.loadingModel} ${webLLM.progress}%` : copy.loadGemma}
-          </button>
+            {webLLM.isLoaded
+              ? copy.gemmaReady
+              : webLLM.isLoading
+                ? `${copy.preparingAi} ${webLLM.progress}%`
+                : copy.aiFallback}
+          </div>
           <p className="ai-progress">{webLLM.selectedModel}</p>
-          {webLLM.status ? <p className="ai-progress">{webLLM.status}</p> : null}
         </section>
 
         <section className="panel-block">
