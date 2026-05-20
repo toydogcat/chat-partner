@@ -2,12 +2,71 @@
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  color: #1e2329;
-  background: #f4f0e8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root,
+.app-shell[data-theme="dark"] {
+  --page-bg: #111820;
+  --page-accent-a: rgba(46, 139, 132, 0.16);
+  --page-accent-b: rgba(188, 92, 58, 0.12);
+  --panel-bg: rgba(25, 34, 43, 0.86);
+  --panel-border: rgba(221, 232, 236, 0.12);
+  --panel-shadow: rgba(0, 0, 0, 0.28);
+  --composer-bg: rgba(17, 24, 32, 0.66);
+  --text: #edf3f2;
+  --muted: #a7b5b9;
+  --heading: #f7fbfa;
+  --accent: #5dd2bf;
+  --accent-strong: #3aa897;
+  --accent-soft: #203f3d;
+  --input-bg: #111820;
+  --input-border: rgba(221, 232, 236, 0.16);
+  --bubble-bg: #19262d;
+  --user-bg: #265d76;
+  --user-avatar-bg: #395369;
+  --chip-bg: #24323a;
+  --chip-text: #c6e9e3;
+  --danger-bg: #442423;
+  --danger-text: #f4c1b9;
+  --warning-bg: #47351d;
+  --warning-text: #f2ce9a;
+  --focus: rgba(93, 210, 191, 0.22);
+  --rule-accent: #c06445;
+  color: var(--text);
+  background: var(--page-bg);
+}
+
+.app-shell[data-theme="light"] {
+  --page-bg: #f4f0e8;
+  --page-accent-a: rgba(52, 128, 116, 0.16);
+  --page-accent-b: rgba(187, 92, 58, 0.16);
+  --panel-bg: rgba(255, 255, 255, 0.76);
+  --panel-border: rgba(30, 35, 41, 0.12);
+  --panel-shadow: rgba(31, 45, 53, 0.1);
+  --composer-bg: rgba(255, 255, 255, 0.6);
+  --text: #1e2329;
+  --muted: #5d6870;
+  --heading: #22313b;
+  --accent: #307064;
+  --accent-strong: #2f6f65;
+  --accent-soft: #ddeee8;
+  --input-bg: #fffdf8;
+  --input-border: rgba(30, 35, 41, 0.16);
+  --bubble-bg: #fffdf8;
+  --user-bg: #234d63;
+  --user-avatar-bg: #34495e;
+  --chip-bg: #e6eef2;
+  --chip-text: #244e65;
+  --danger-bg: #f0dcd8;
+  --danger-text: #7c2f2a;
+  --warning-bg: #f6e0c5;
+  --warning-text: #704017;
+  --focus: rgba(47, 111, 101, 0.18);
+  --rule-accent: #c06445;
 }
 
 * {
@@ -42,17 +101,17 @@ button:disabled {
   min-height: 100vh;
   padding: 20px;
   background:
-    linear-gradient(135deg, rgba(52, 128, 116, 0.16), transparent 34%),
-    linear-gradient(315deg, rgba(187, 92, 58, 0.16), transparent 36%),
-    #f4f0e8;
+    linear-gradient(135deg, var(--page-accent-a), transparent 34%),
+    linear-gradient(315deg, var(--page-accent-b), transparent 36%),
+    var(--page-bg);
 }
 
 .conversation-panel,
 .control-panel {
   min-height: calc(100vh - 40px);
-  border: 1px solid rgba(30, 35, 41, 0.12);
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow: 0 18px 60px rgba(31, 45, 53, 0.1);
+  border: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  box-shadow: 0 18px 60px var(--panel-shadow);
   backdrop-filter: blur(18px);
 }
 
@@ -69,7 +128,7 @@ button:disabled {
   justify-content: space-between;
   gap: 18px;
   padding: 24px 26px 18px;
-  border-bottom: 1px solid rgba(30, 35, 41, 0.1);
+  border-bottom: 1px solid var(--panel-border);
 }
 
 .topbar-actions {
@@ -84,7 +143,7 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  color: #5d6870;
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 800;
 }
@@ -92,12 +151,12 @@ button:disabled {
 .view-counts span {
   border-radius: 999px;
   padding: 6px 9px;
-  background: #f7f5ee;
+  background: var(--chip-bg);
 }
 
 .eyebrow {
   margin: 0 0 4px;
-  color: #307064;
+  color: var(--accent);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0;
@@ -131,19 +190,19 @@ h2 {
   height: 38px;
   padding: 0 14px;
   border-radius: 999px;
-  color: #1f4f47;
-  background: #e1f1ec;
+  color: var(--chip-text);
+  background: var(--accent-soft);
   font-weight: 800;
 }
 
 .status-pill.searching {
-  color: #704017;
-  background: #f6e0c5;
+  color: var(--warning-text);
+  background: var(--warning-bg);
 }
 
 .status-pill.error {
-  color: #80302c;
-  background: #f5d4cf;
+  color: var(--danger-text);
+  background: var(--danger-bg);
 }
 
 .messages {
@@ -169,13 +228,13 @@ h2 {
 .message.user .avatar {
   grid-column: 2;
   grid-row: 1;
-  background: #34495e;
+  background: var(--user-avatar-bg);
   color: white;
 }
 
 .message.user .bubble {
   grid-column: 1;
-  background: #234d63;
+  background: var(--user-bg);
   color: white;
 }
 
@@ -185,16 +244,16 @@ h2 {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  color: #19564e;
-  background: #dcefe8;
+  color: var(--chip-text);
+  background: var(--accent-soft);
 }
 
 .bubble {
   min-width: 0;
-  border: 1px solid rgba(30, 35, 41, 0.1);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
   padding: 16px 18px;
-  background: #fffdf8;
+  background: var(--bubble-bg);
 }
 
 .bubble p {
@@ -217,15 +276,15 @@ h2 {
   height: 30px;
   border: 0;
   border-radius: 999px;
-  color: #1f4f47;
-  background: #dcefe8;
+  color: var(--chip-text);
+  background: var(--accent-soft);
 }
 
 .sources a {
   border-radius: 999px;
   padding: 6px 10px;
-  color: #244e65;
-  background: #e6eef2;
+  color: var(--chip-text);
+  background: var(--chip-bg);
   font-size: 0.86rem;
   font-weight: 800;
   text-decoration: none;
@@ -237,8 +296,8 @@ h2 {
   gap: 12px;
   align-items: end;
   padding: 18px;
-  border-top: 1px solid rgba(30, 35, 41, 0.1);
-  background: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid var(--panel-border);
+  background: var(--composer-bg);
 }
 
 .icon-button,
@@ -258,8 +317,8 @@ h2 {
 }
 
 .icon-button {
-  color: #1b544c;
-  background: #ddeee8;
+  color: var(--chip-text);
+  background: var(--accent-soft);
 }
 
 .icon-button.active {
@@ -269,7 +328,7 @@ h2 {
 
 .send-button {
   color: white;
-  background: #2f6f65;
+  background: var(--accent-strong);
 }
 
 textarea {
@@ -277,18 +336,18 @@ textarea {
   min-height: 46px;
   max-height: 140px;
   resize: vertical;
-  border: 1px solid rgba(30, 35, 41, 0.16);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   padding: 12px 14px;
-  color: #1e2329;
-  background: #fffdf8;
+  color: var(--text);
+  background: var(--input-bg);
   outline: none;
 }
 
 textarea:focus,
 select:focus {
-  border-color: #2f6f65;
-  box-shadow: 0 0 0 3px rgba(47, 111, 101, 0.18);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--focus);
 }
 
 .control-panel {
@@ -303,20 +362,20 @@ select:focus {
   display: grid;
   gap: 14px;
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(30, 35, 41, 0.1);
+  border-bottom: 1px solid var(--panel-border);
 }
 
 .block-title {
   display: flex;
   align-items: center;
   gap: 9px;
-  color: #22313b;
+  color: var(--heading);
 }
 
 label {
   display: grid;
   gap: 8px;
-  color: #5e6870;
+  color: var(--muted);
   font-size: 0.88rem;
   font-weight: 800;
 }
@@ -324,11 +383,11 @@ label {
 select {
   width: 100%;
   height: 44px;
-  border: 1px solid rgba(30, 35, 41, 0.16);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   padding: 0 12px;
-  color: #1e2329;
-  background: #fffdf8;
+  color: var(--text);
+  background: var(--input-bg);
 }
 
 .segmented {
@@ -337,7 +396,7 @@ select {
   gap: 6px;
   padding: 5px;
   border-radius: 8px;
-  background: #e8e3d9;
+  background: var(--chip-bg);
 }
 
 .segmented button {
@@ -347,7 +406,7 @@ select {
   gap: 6px;
   min-height: 38px;
   border-radius: 6px;
-  color: #4e5961;
+  color: var(--muted);
   background: transparent;
   font-size: 0.86rem;
   font-weight: 850;
@@ -355,7 +414,7 @@ select {
 
 .segmented button.selected {
   color: white;
-  background: #2f6f65;
+  background: var(--accent-strong);
 }
 
 .upload-zone {
@@ -365,10 +424,10 @@ select {
   justify-content: center;
   gap: 10px;
   min-height: 92px;
-  border: 1px dashed rgba(30, 35, 41, 0.26);
+  border: 1px dashed var(--input-border);
   border-radius: 8px;
-  color: #31556a;
-  background: #f7f5ee;
+  color: var(--chip-text);
+  background: var(--input-bg);
   text-align: center;
 }
 
@@ -383,9 +442,9 @@ select {
   max-height: 170px;
   overflow: auto;
   margin: 0;
-  border-left: 3px solid #c06445;
+  border-left: 3px solid var(--rule-accent);
   padding: 10px 0 10px 12px;
-  color: #4d555b;
+  color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.55;
 }
@@ -398,8 +457,8 @@ select {
   min-height: 42px;
   margin-top: auto;
   border-radius: 8px;
-  color: #7c2f2a;
-  background: #f0dcd8;
+  color: var(--danger-text);
+  background: var(--danger-bg);
   font-weight: 850;
 }
 
@@ -411,7 +470,7 @@ select {
   min-height: 42px;
   border-radius: 8px;
   color: white;
-  background: #244e65;
+  background: var(--user-bg);
   font-weight: 850;
 }
 
@@ -423,24 +482,24 @@ select {
   min-height: 42px;
   border-radius: 8px;
   padding: 0 12px;
-  color: #704017;
-  background: #f6e0c5;
+  color: var(--warning-text);
+  background: var(--warning-bg);
   font-weight: 850;
 }
 
 .ai-status.ready {
-  color: #1f4f47;
-  background: #e1f1ec;
+  color: var(--chip-text);
+  background: var(--accent-soft);
 }
 
 .ai-status.fallback {
-  color: #5d6870;
-  background: #f7f5ee;
+  color: var(--muted);
+  background: var(--chip-bg);
 }
 
 .ai-progress {
   margin: 0;
-  color: #5d6870;
+  color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.45;
 }
@@ -454,11 +513,11 @@ select {
   display: grid;
   gap: 5px;
   width: 100%;
-  border: 1px solid rgba(30, 35, 41, 0.12);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
   padding: 10px 12px;
-  color: #22313b;
-  background: #fffdf8;
+  color: var(--heading);
+  background: var(--input-bg);
   text-align: left;
 }
 
@@ -471,7 +530,7 @@ select {
 }
 
 .topic-list small {
-  color: #60717b;
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 800;
 }
@@ -487,14 +546,14 @@ select {
   gap: 3px;
   border-radius: 8px;
   padding: 10px;
-  color: #60717b;
-  background: #f7f5ee;
+  color: var(--muted);
+  background: var(--chip-bg);
   font-size: 0.78rem;
   font-weight: 800;
 }
 
 .stat-grid b {
-  color: #22313b;
+  color: var(--heading);
   font-size: 1rem;
 }
 
@@ -506,18 +565,18 @@ select {
 .note-list article {
   display: grid;
   gap: 4px;
-  border-left: 3px solid #c06445;
+  border-left: 3px solid var(--rule-accent);
   padding: 8px 0 8px 10px;
-  background: #fffdf8;
+  background: var(--input-bg);
 }
 
 .note-list strong {
-  color: #22313b;
+  color: var(--heading);
   font-size: 0.88rem;
 }
 
 .note-list span {
-  color: #60717b;
+  color: var(--muted);
   font-size: 0.8rem;
   line-height: 1.35;
 }

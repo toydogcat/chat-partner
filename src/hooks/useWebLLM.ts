@@ -38,5 +38,5 @@ export function useWebLLM() {
     }
   }, [engine, isLoading])
 
-  return { engine, progress, status, isLoaded, isLoading, init, selectedModel }
+  return { engine, progress, status, isLoaded, isLoading, init }
 }

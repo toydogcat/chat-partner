@@ -47,6 +47,7 @@ type TeachingMode = 'companion' | 'balanced' | 'coach'
 type VoiceGender = 'female' | 'male'
 type SearchState = 'idle' | 'searching' | 'done' | 'error'
 type ShadowingState = 'idle' | 'listening' | 'done'
+type ThemeName = 'dark' | 'light'
 
 type Message = {
   id: string
@@ -95,6 +96,9 @@ const uiCopy = {
     offline: '離線',
     partner: '夥伴設定',
     interfaceLanguage: '介面語言',
+    theme: '主題',
+    darkTheme: '深色',
+    lightTheme: '淺色',
     partnerLanguage: '夥伴語言',
     teachingMode: '教學模式',
     chat: '陪聊',
@@ -140,6 +144,9 @@ const uiCopy = {
     offline: 'Offline',
     partner: 'Partner',
     interfaceLanguage: 'Interface language',
+    theme: 'Theme',
+    darkTheme: 'Dark',
+    lightTheme: 'Light',
     partnerLanguage: 'Partner language',
     teachingMode: 'Teaching mode',
     chat: 'Chat',
@@ -289,6 +296,7 @@ function makePartnerReply(
 
 function App() {
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>('zh')
+  const [theme, setTheme] = useState<ThemeName>('dark')
   const [language, setLanguage] = useState(languageOptions[0])
   const [mode, setMode] = useState<TeachingMode>('balanced')
   const [voiceGender, setVoiceGender] = useState<VoiceGender>('female')
@@ -344,6 +352,19 @@ function App() {
   useEffect(() => {
     void webLLM.init()
   }, [webLLM.init])
+
+  useEffect(() => {
+    if (document.querySelector('script[data-vercount="true"]')) {
+      return
+    }
+
+    const script = document.createElement('script')
+    script.async = true
+    script.src = 'https://www.vercount.one/js'
+    script.crossOrigin = 'anonymous'
+    script.dataset.vercount = 'true'
+    document.body.appendChild(script)
+  }, [])
 
   function speak(text: string) {
     if (!('speechSynthesis' in window)) {
@@ -540,7 +561,7 @@ function App() {
   }
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" data-theme={theme}>
       <section className="conversation-panel">
         <header className="topbar">
           <div>
@@ -549,9 +570,15 @@ function App() {
           </div>
           <div className="topbar-actions">
             <div className="view-counts">
-              <span>{copy.views}: <b id="vercount_value_page_pv">-</b></span>
-              <span>{copy.siteViews}: <b id="vercount_value_site_pv">-</b></span>
-              <span>{copy.visitors}: <b id="vercount_value_site_uv">-</b></span>
+              <span id="busuanzi_container_page_pv">
+                {copy.views}: <b id="busuanzi_value_page_pv">-</b>
+              </span>
+              <span id="busuanzi_container_site_pv">
+                {copy.siteViews}: <b id="busuanzi_value_site_pv">-</b>
+              </span>
+              <span id="busuanzi_container_site_uv">
+                {copy.visitors}: <b id="busuanzi_value_site_uv">-</b>
+              </span>
             </div>
             <div className={`status-pill ${searchState}`}>
               <Globe2 size={16} />
@@ -650,6 +677,13 @@ function App() {
             </select>
           </label>
           <label>
+            {copy.theme}
+            <select value={theme} onChange={(event) => setTheme(event.target.value as ThemeName)}>
+              <option value="dark">{copy.darkTheme}</option>
+              <option value="light">{copy.lightTheme}</option>
+            </select>
+          </label>
+          <label>
             {copy.partnerLanguage}
             <select
               value={language.code}
@@ -701,7 +735,6 @@ function App() {
                 ? `${copy.preparingAi} ${webLLM.progress}%`
                 : copy.aiFallback}
           </div>
-          <p className="ai-progress">{webLLM.selectedModel}</p>
         </section>
 
         <section className="panel-block">
